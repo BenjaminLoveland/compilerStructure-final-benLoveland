@@ -1,14 +1,20 @@
-Source code for mini-SQL language built for compiler structure final
+This is a small SQL-like compiler with a tokenizer, parser, AST, and interpreter.
 
-BNF Notation for the project
-<query>      ::= "SELECT" <field_list> "FROM" <identifier> [ "WHERE" <bool_expr> ]
-<field_list> ::= "*" | <identifier> { "," <identifier> }
-<bool_expr>  ::= <bool_term> { "OR" <bool_term> }
-<bool_term>  ::= <bool_factor> { "AND" <bool_factor> }
-<bool_factor>::= "(" <bool_expr> ")" | <predicate>
-<predicate>  ::= <identifier> <comp_op> <literal>
-<comp_op>    ::= "=" | "!=" | "<" | "<=" | ">" | ">="
-<literal>    ::= <number> | <string> | "true" | "false"
-<identifier> ::= letter { letter | digit | "_" }
-<number>     ::= digit { digit } [ "." digit { digit } ]
-<string>     ::= '"' { any_character_except_quote } '"'
+It supports SELECT, FROM, and WHERE clauses. The WHERE clause is recursive.
+
+The makefile is used to compile and run this project. Use 'make' and then 'make run' to compile and run the project.
+
+The database being used for the queries is stored in main.cpp on line 33.
+
+When the program is run, it takes the query being input after a newline is sent. Here are some example queries to run:
+    SELECT name, age
+    FROM Customers
+    WHERE age >= 21
+
+    SELECT name, status
+    FROM Customers
+    WHERE status != "regular"
+
+    SELECT name, status
+    FROM Customers
+    WHERE (age >= 21 AND active = true) OR status = "vip"

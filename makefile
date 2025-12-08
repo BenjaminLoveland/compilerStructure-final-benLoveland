@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
-SRC = tokenizer.cpp parser.cpp main.cpp
+SRC = tokenizer.cpp parser.cpp main.cpp evaluator.cpp symbol_table.cpp
 OBJ = $(SRC:.cpp=.o)
 EXEC = queryparser
 
